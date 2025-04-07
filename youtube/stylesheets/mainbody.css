@@ -1,0 +1,57 @@
+/* Top Small Header - Horizontally */
+.small-header {
+  position: fixed;
+  top: 56px;
+  left: 240px;
+  right: 0;
+  height: 56px;
+  z-index: 9;
+  border-top: 1px solid #ededed;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  overscroll-behavior-inline: contain;
+}
+.scroll {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 10px;
+}
+.scroll > * {
+  scroll-snap-align: start;
+}
+.small-header::-webkit-scrollbar {
+  height: 2px;
+  width: 0;
+}
+.small-header > a {
+  display: inline-block;
+  text-decoration: none;
+  color: #323232;
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: #f2f2f2;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  margin-left: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 0.15s;
+}
+.small-header > a:hover {
+  background-color: #e5e3e3;
+}
+/* Small Header End */
+.container {
+  padding-top: 25px;
+  display: grid;
+  grid-template-columns: 359px 359px 359px 359px;
+  grid-gap: 15px;
+  z-index: 2;
+}
