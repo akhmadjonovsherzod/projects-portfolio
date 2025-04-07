@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 const firebaseConfig = {
-  apiKey: "AIzaSyCXFKlPoY3RALYkVUvCtVHM_nHWBxyVNLo",
+  apiKey: "API HERE",
   authDomain: "instagram-clone-acbeb.firebaseapp.com",
   projectId: "instagram-clone-acbeb",
   storageBucket: "instagram-clone-acbeb.appspot.com",
