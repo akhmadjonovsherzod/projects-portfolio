@@ -40,7 +40,7 @@ The Teacher Panel provides teachers with tools to manage courses, view statistic
 ## 🚀 How to Run Locally
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/EduOn-2.git
+   git clone "repo"
    ```
 2. Navigate into the project folder:
    ```bash
