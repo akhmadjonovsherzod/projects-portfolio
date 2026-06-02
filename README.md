@@ -4,6 +4,11 @@
 
 This is an interactive web application built with Python Dash for visualizing workforce data and capacity planning metrics in an R&D organization. The application uses synthetically generated data to simulate realistic operational planning scenarios.
 
+/images/overview.jpg
+/images/demand.jpg
+/images/availability.jpg
+/images/project_alloc.jpg
+
 ## Requirements
 
 - Python 3.10 or higher
