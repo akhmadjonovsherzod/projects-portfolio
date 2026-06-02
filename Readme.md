@@ -6,10 +6,10 @@ This is an interactive web application built with Python Dash for analysing proc
 
 ## Preview
 
-![Dashboard Preview](/images/preview-1.jpg)
-![Dashboard Preview](/images/preview-2.jpg)
-![Dashboard Preview](/images/preview-3.jpg)
-![Dashboard Preview](/images/preview-4.jpg)
+![Dashboard Preview](/images/preview-1.png)
+![Dashboard Preview](/images/preview-2.png)
+![Dashboard Preview](/images/preview-3.png)
+![Dashboard Preview](/images/preview-4.png)
 
 
 ## Requirements
