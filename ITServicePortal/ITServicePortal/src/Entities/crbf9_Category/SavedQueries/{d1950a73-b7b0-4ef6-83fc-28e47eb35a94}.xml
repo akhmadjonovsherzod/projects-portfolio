@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{d1950a73-b7b0-4ef6-83fc-28e47eb35a94}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="crbf9_categoryname" select="1" icon="1" preview="1">
+        <row name="result" id="crbf9_categoryid">
+          <cell name="crbf9_categoryname" width="300" />
+          <cell name="crbf9_description" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="crbf9_category">
+          <attribute name="crbf9_categoryid" />
+          <attribute name="crbf9_categoryname" />
+          <attribute name="createdon" />
+          <order attribute="crbf9_categoryname" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="crbf9_description" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Categories" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

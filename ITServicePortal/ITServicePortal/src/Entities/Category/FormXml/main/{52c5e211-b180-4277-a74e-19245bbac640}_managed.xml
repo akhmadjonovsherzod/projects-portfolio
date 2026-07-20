@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{52c5e211-b180-4277-a74e-19245bbac640}</formid>
+    <IntroducedVersion>8.1.0.0</IntroducedVersion>
+    <FormPresentation>2</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls" solutionaction="Modified">
+      <tabs>
+        <tab id="{3E787DD7-80E6-4F09-AA25-10A4378BBA6D}" showlabel="true" IsUserDefined="1" ordinalvalue="0">
+          <columns>
+            <column width="50%" id="0">
+              <sections>
+                <section id="{C2913B79-3B3C-46E8-8540-7C70149434CE}" showlabel="true" showbar="true" IsUserDefined="0" name="Category Information" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{788F200F-48F4-49B4-9EC2-D844CB6FE269}" showlabel="true" locklevel="0" ordinalvalue="10002" solutionaction="Removed" />
+                    </row>
+                    <row>
+                      <cell id="{B5A42942-2EA5-4C67-A7D0-A4EA8D81E061}" showlabel="true" locklevel="0" ordinalvalue="10003" solutionaction="Removed" />
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{02c4a622-4ac5-447f-be21-33aec7d82473}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left" solutionaction="Added">
+        <rows>
+          <row>
+            <cell id="{748c32e8-4ecc-4d9a-b1d0-ceee66aee662}" showlabel="false" ordinalvalue="10000">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ba10df9d-0e58-4ac6-8ea1-ccd39a9e7203}" showlabel="false" ordinalvalue="20001">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e4d63dad-91da-4c45-86f3-d408647f7ab8}" showlabel="false" ordinalvalue="30002">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{77ba6c16-369b-4ce4-a94d-220a3d592862}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left" solutionaction="Added">
+        <rows>
+          <row>
+            <cell id="{6bcf5fb8-68a1-4eaa-ba4d-745117f20043}" showlabel="false" ordinalvalue="10000">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{388c4637-f916-4aa9-b212-3db1796eb009}" showlabel="false" ordinalvalue="20001">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f4a2a12d-18a2-4f8f-918b-8180e2a6170e}" showlabel="false" ordinalvalue="30002">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true" solutionaction="Added">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <LocalizedNames>
+      <LocalizedName description="Category Main Interactive" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Default Interactive Experience category form" languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

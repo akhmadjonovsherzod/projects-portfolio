@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{68ce192a-f678-4c38-a45c-1e3727448f65}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{1ADECAF9-CC97-4657-8317-DE9FFCCFC051}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{9D3AF536-470D-457C-B7BC-C79AE7DAADD8}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{E5D28820-6D6E-4AB5-918C-5362775EE56B}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="crbf9_fullname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="crbf9_Fullname" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3E1421E3-7F0F-4FB3-8308-98303E8EC0D4}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c3d1585d-28e0-4143-bb23-c09bc442c369}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Full name" languagecode="1033" />
+                        </labels>
+                        <control id="crbf9_fullname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="crbf9_fullname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4215f1d7-ae86-445a-88ad-42cf13e95e4a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Job title" languagecode="1033" />
+                        </labels>
+                        <control id="crbf9_jobtitle" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="crbf9_jobtitle" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{73d24d36-6478-42f3-a55d-c56765f5983a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Department" languagecode="1033" />
+                        </labels>
+                        <control id="crbf9_department" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="crbf9_department" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5e27126d-3d6d-4462-b256-273fa4b687dd}">
+                        <labels>
+                          <label description="Email" languagecode="1033" />
+                        </labels>
+                        <control id="crbf9_email" classid="{e0dece4b-6fc8-4a8f-a065-082708572369}" datafieldname="crbf9_email" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{034dfe98-5e7c-47ab-8a10-40fa11129d5e}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{bed453d3-8ce7-4f40-9604-912c4120ed38}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{194823c1-2e4d-48fe-8c0c-f5876877b8bb}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{7d768da5-7f6d-411c-99b9-271d02cc9c02}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{fd488ed7-4af9-421e-a11b-1fb4f8f4ffb8}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{f161c56b-722d-4a82-924c-b0d5ab09c32d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3f653359-2be5-4f42-be1a-6b8657ee280b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d0d9a18b-0248-491f-9670-c5c90bd6263c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
