@@ -1,0 +1,37 @@
+# Generated data
+raw_data/
+processed_data/
+
+# AWS credentials
+.aws/
+*.pem
+credentials
+config
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Spark
+derby.log
+metastore_db/
+spark-warehouse/
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
