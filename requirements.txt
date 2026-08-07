@@ -1,0 +1,11 @@
+# Core pipeline (generate_data.py, pyspark_etl.py, upload_to_s3.py)
+pandas
+numpy
+faker
+pyarrow
+pyspark
+boto3
+
+# dbt (Snowflake adapter)
+dbt-core
+dbt-snowflake

@@ -2,10 +2,12 @@
 
 A PySpark ETL pipeline that ingests retail order data from three different
 source formats, computes customer-level analytics with SQL window
-functions, and lands the output in AWS S3 for downstream warehousing.
+functions, lands the output in AWS S3, transforms it through Snowflake +
+dbt, and orchestrates the whole thing with Airflow.
 
-Built as a hands-on project to work with distributed data processing,
-cloud storage, and (in progress) a modern ELT stack on top of it.
+Built as a hands-on project to close a specific gap: hands-on distributed
+processing, cloud storage/IAM, and a modern ELT stack, all in one
+end-to-end pipeline rather than isolated exercises.
 
 ## Status
 
@@ -14,8 +16,8 @@ cloud storage, and (in progress) a modern ELT stack on top of it.
 | Synthetic multi-source data generation | ✅ Done |
 | PySpark ETL (join, window functions, partitioned Parquet) | ✅ Done |
 | AWS S3 landing zone with least-privilege IAM | ✅ Done |
-| Snowflake + dbt transformation layer | 🔧 In progress |
-| Airflow orchestration | 📋 Planned |
+| Snowflake + dbt transformation layer | ✅ Done |
+| Airflow orchestration | ✅ Done |
 
 ## Architecture
 
@@ -25,27 +27,28 @@ products.csv ──┼──▶ PySpark ETL ──▶ processed_data/order_facts
 orders.json ────┤     (join,           (partitioned Parquet)         (raw/order_facts/)
 order_items.csv ┘   window fns)                                          │
                                                                            ▼
-                                                              Snowflake external stage
+                                                                  Snowflake raw table
                                                                            │
                                                                            ▼
                                                                     dbt staging + marts
                                                                            │
                                                                            ▼
-                                                                   Airflow (scheduled)
+                                                        Airflow DAG (orchestrates all of the above, @daily)
 ```
 
 ## Why this project
 
 Deliberately structured to mirror how a real ingestion pipeline looks:
 three different source *shapes* (CSV table dumps, a JSON API-style export,
-and a large CSV file drop) rather than one clean input file, and a
+and a large CSV file drop) rather than one clean input file, a
 distributed processing step that's actually justified by data volume
-(1.5M+ order line items) rather than decorative.
+(1.5M+ order line items), and a genuine orchestrated schedule rather than
+a set of scripts run by hand.
 
 ## Tech Stack
 
 Python, PySpark, SQL (joins, aggregations, window functions), AWS S3,
-IAM, dbt, Snowflake, Airflow *(in progress — see Status above)*
+IAM, dbt, Snowflake, Airflow, Docker
 
 ## Pipeline Stages
 
@@ -78,49 +81,82 @@ and computes:
   functions run — running this directly on line-item grain would double-
   or triple-count orders with multiple items.
 - Output is written as Parquet, partitioned by `order_year_month`, using
-  Spark's own write engine (not a Python Parquet library) — this matters
-  in practice, since it avoided several Windows-specific library issues
-  encountered locally during development.
+  Spark's own write engine — this matters in practice, since it avoided
+  several Windows-specific native-library issues hit locally during
+  development (see `HADOOP_HOME`/`winutils.exe` note below).
 
 ### 3. AWS S3 landing (`upload_to_s3.py`)
 
 Uploads the partitioned Parquet output to S3, preserving the same
-`order_year_month=YYYY-MM/` folder structure so it can be read directly
-by a Snowflake external stage without reshaping.
+`order_year_month=YYYY-MM/` folder structure. Access is via a dedicated
+IAM user scoped to a single bucket (`s3:GetObject`, `s3:PutObject`,
+`s3:ListBucket` only) rather than broad or root credentials.
 
-Access is via a dedicated IAM user scoped to a single bucket
-(`s3:GetObject`, `s3:PutObject`, `s3:ListBucket` only) rather than
-broad or root credentials.
+### 4. Snowflake + dbt (`dbt/retail_pipeline/`, `snowflake-sql/`)
 
-### 4. Snowflake + dbt *(in progress)*
+Raw Parquet is staged into Snowflake and loaded into `raw.order_facts`,
+then transformed through a dbt staging + marts layer:
 
-Raw Parquet is staged into Snowflake and transformed through a dbt
-staging + marts layer with SQL-level tests. Setup in progress, including
-an S3 storage integration via IAM role trust (rather than embedded
-credentials) where possible.
+- `stg_order_facts` — light typing/renaming staging view
+- `fct_monthly_channel_performance` — revenue/order-count rollup by
+  month, channel, and country
+- `fct_customer_summary` — one row per customer, with lifetime spend and
+  an in-country spend rank (a *different* window function than the one
+  computed upstream in PySpark, scoped by country rather than global)
 
-### 5. Airflow orchestration *(planned)*
+10 schema tests across both layers (`unique`, `not_null`,
+`accepted_values`). One of these tests caught a real bug during
+development: `order_year_month` is a Hive partition column that Spark
+strips from the physical Parquet files by design, so a naive Snowflake
+load left it entirely null. Fixed by re-deriving it in dbt from
+`order_date` instead of trusting the passthrough column — see the model
+comments in `stg_order_facts.sql`.
 
-A DAG chaining extract → PySpark transform → S3 upload → Snowflake load →
-dbt run, scheduled to run on a regular cadence.
+**On the S3 connection:** originally built with a Snowflake storage
+integration (IAM role trust, no long-lived keys) rather than embedded
+credentials. Hit a reproducible `AssumeRole` failure traced to Snowflake
+rotating the integration's `STORAGE_AWS_EXTERNAL_ID` value — confirmed
+across three separate `DESC INTEGRATION` calls, ruled out SCPs and
+permissions boundaries as causes. Made the pragmatic call to unblock with
+a credentials-based external stage given time constraints; the
+storage-integration SQL is preserved in `snowflake-sql/` as a record of
+the approach and the diagnosis.
+
+### 5. Airflow orchestration (`airflow/`)
+
+A Dockerized Airflow deployment (custom image extending
+`apache/airflow:2.9.3` with Java, PySpark, and dbt installed) runs a
+single DAG chaining all of the above:
+
+```
+generate_data → pyspark_etl → upload_to_s3 → load_to_snowflake → dbt_build
+```
+
+Scheduled `@daily`, with retries configured (2 attempts, 5-minute delay)
+on each task. Credentials are injected via environment variables
+(`.env`, gitignored) and read by dbt through `env_var()` in
+`profiles.yml` — never hardcoded in the DAG or image.
 
 ## Project Structure
 
 ```
 .
-├── generate_data.py       # synthetic data generator
-├── pyspark_etl.py         # PySpark transformation job
-├── upload_to_s3.py        # S3 upload script
-├── raw_data/               # generated source files (gitignored)
-├── processed_data/         # PySpark output (gitignored)
-├── dbt/                    # dbt project (in progress)
+├── generate_data.py         # synthetic data generator
+├── pyspark_etl.py           # PySpark transformation job
+├── upload_to_s3.py          # S3 upload script
+├── requirements.txt         # for running the scripts locally, outside Docker
+├── raw_data/                 # generated source files (gitignored)
+├── processed_data/           # PySpark output (gitignored)
+├── dbt/retail_pipeline/       # dbt project (staging + marts + tests)
+├── snowflake-sql/             # Snowflake setup SQL (warehouse, stage, storage integration)
+├── airflow/                   # Dockerized Airflow: DAG, Dockerfile, compose file
 └── README.md
 ```
 
 ## Running it locally
 
 ```bash
-pip install pandas numpy faker boto3 pyspark
+pip install -r requirements.txt
 
 python generate_data.py       # generates raw_data/
 python pyspark_etl.py         # generates processed_data/order_facts/
@@ -131,3 +167,15 @@ Requires a local Java installation (PySpark runs on the JVM). On Windows,
 also requires `winutils.exe`/`hadoop.dll` on PATH for local Parquet writes
 — see [cdarlint/winutils](https://github.com/cdarlint/winutils) if you
 hit a `HADOOP_HOME` or `UnsatisfiedLinkError` error.
+
+## Running the full orchestrated pipeline
+
+```bash
+cd airflow
+cp .env.example .env    # fill in real Snowflake + AWS credentials
+docker compose up airflow-init
+docker compose up
+```
+
+Open `http://localhost:8080` (`admin` / `admin`), un-pause `retail_pipeline`,
+and trigger a run.

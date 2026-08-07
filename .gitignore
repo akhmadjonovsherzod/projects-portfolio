@@ -1,5 +1,4 @@
-# Generated data
-raw_data/
+# Generated data — regenerable via generate_data.py / pyspark_etl.py
 processed_data/
 
 # AWS credentials
@@ -35,3 +34,6 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Airflow
+airflow/.env
