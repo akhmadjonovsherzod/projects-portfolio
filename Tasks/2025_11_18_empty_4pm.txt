@@ -1,0 +1,168 @@
+
+-----OLYMPICS
+--1. Return the name of each country which is located in the same continent as Hungary. Omit Hungary from the output.
+
+-- Solve the exercise joining tables.
+
+-- Solve the exercise using subselects.
+
+--2. Return the name and the medals of each country which gained more medals than the average.
+
+--3. Return the name, continent and population of each country which is in the same continent as Hungary and its population is greater or equal to the population of Hungary. Order the countries by their population in descending order.
+
+--4. Return the name of each African country which starts with the same letter as any European country.
+
+--5. Return the name of each country which scored 51, 36 or 14 gold medals
+
+--6. Return the name, continent and population of each country which has the greatest population in its continent.
+
+-- ANY, ALL, EXISTS 
+
+-- The ANY operator:
+--	returns a boolean value as a result
+--	returns TRUE if ANY of the subquery values meet the condition
+-- ANY means that the condition will be true if the operation is true for any of the values in the range.
+
+-- The ALL operator:
+--	returns a boolean value as a result
+--	returns TRUE if ALL of the subquery values meet the condition
+--	is used with SELECT, WHERE and HAVING statements
+-- ALL means that the condition will be true only if the operation is true for all values in the range. 
+
+-- The EXISTS operator is used to test for the existence of any record in a subquery.
+-- The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+--7. Return the ID and name of those countries that have scored any medals (thus, they appear in the o_medal_table table).
+
+--8. Return each country that is the most populous on its continent.
+
+--9. Return each country that has greater population than one of the European countries has.
+
+--10. Return 5 countries having the greatest areas.
+
+--11. List those individual athletes (from the OLYMPICS.O_ATHLETES table) who
+--are older than the youngest Hungarian athlete.
+
+
+
+
+----------------------------
+-------------------------------------------------------------------
+--VIEW 
+--In SQL, a view is a virtual table based on the result-set of an SQL statement.
+--A view contains rows and columns, just like a real table. 
+--The fields in a view are fields from one or more real tables in the database.
+--You can add SQL statements and functions to a view and present the data as
+--if the data were coming from one single table.
+--A view is created with the CREATE VIEW statement. 
+
+--CREATE VIEW Syntax
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+
+--1. Create a view which lists the title, isbn and price per page of
+--the books which topic is thriller.
+
+--2. Create a view which lists the last 10 borrowing with the customer name and the book title.
+
+--3. Create a view which lists the title, isbn and price per page of the books which topic --is thriller. 
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+--Grant: 
+--SQL Grant command is specifically used to provide privileges 
+--to database objects for a user. 
+--This command also allows users to grant permissions to other users too. 
+
+--Syntax: 
+grant privilege_name on object_name to {user_name | public | role_name} 
+
+--Here privilege_name is which permission has to be granted, 
+--object_name is the name of the database object, 
+--user_name is the user to which access should be provided, 
+--the public is used to permit access to all the users. 
+
+--privilege_name: select, insert, update, delete, references, all
+
+
+--create numbers table.
+--example: 
+
+--Revoke: 
+--Revoke command withdraw user privileges on database objects if any granted. 
+--It does operations opposite to the Grant command. 
+--When a privilege is revoked from a particular user U, 
+--then the privileges granted to all other users by user U will be revoked. 
+
+--privilege_name: select, insert, update, delete, reference, all
+
+--Syntax: 
+revoke privilege_name on object_name
+from {user_name | public | role_name}
+
+--example:
+
+
+------------------------------------------------------
+
+--1. Create the tenant table with the following columns: 
+--   name: string 
+--   house id: numeric, 
+--   color of hair string. 
+--The primary key of the table is the house id and the name together. The house id is a --foreign key which refers to the primary key of the house table. 
+
+--2. Drop the constraint called tenant_fk of the tenant table. 
+
+--3. Drop the primary key of the tenant table. 
+
+--4. Add a primary key to the tenant table: the house id and the name together. 
+
+--5. Change the type of the name column of the tenant table: it should be maximum 50 --character long string. 
+
+--6. Rename the name column of the tenant table to name2; 
+
+
+--7. Create a table called Student
+
+--The columns of this table are:
+--   ID: number max 5 digits
+--   Name: char. sequence max 50, must be filled
+--   B_Date: date, must be filled
+--   Parent_ID: number max 6 digits
+--   Height: number max 3 digits.
+--The primary key of this is table is the ID column.
+--The height values cannot be more than 250. The default value is 170 for the height.
+--The Parent_ID is a foreign key referencing to the primary key of the HR.EMPLOYEES table.
+
+
+
+--8.  Create the house table with the following columns: id: numeric type, 
+--   name: string, it has to be filled, 
+--   date of build: date type, 
+--   zip code  fixed long string, 
+--   price: numeric type. 
+--The primary key of the table is the id.
+--The name should be unique in the table. The price should be more than 100
+--if it is filled.
+
+--9.  Add a new column to the house table: house size which type is numeric.
+
+--10. Drop the house size column of the house table.
+
+--11. Rename the house table to house2;
+
+----------------------------------
+-----BOOK_LIBRARY
+
+--1. List the name of the customer 
+--   who has the highest  late_fee.
+
+--2. List the second 3 book items which has largest theoretical value
+
+--3. Create a view which lists for each books (id, title)
+--   how many times was it borrowed.

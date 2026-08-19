@@ -1,0 +1,285 @@
+--Subqueries.
+---------------------------------------------------
+--A subquery is a SQL query nested inside a larger query.
+
+--A subquery may occur in :
+--	- A SELECT clause
+--	- A FROM clause
+--	- A WHERE clause
+
+--The subquery can be nested inside a SELECT, INSERT, UPDATE, 
+--or DELETE statement or inside another subquery.
+--A subquery is usually added within the WHERE Clause 
+--of another SQL SELECT statement.
+--You can use the comparison operators, such as >, <, or =. 
+--The comparison operator can also be a multiple-row operator, such as IN, ANY, or ALL.
+--A subquery is also called an inner query or inner select,
+--while the statement containing a subquery is also called an outer query or outer select.
+--The inner query executes first before its parent query so
+--that the results of an inner query can be passed to the outer query.
+
+--You can use a subquery in a SELECT, INSERT, DELETE, 
+--or UPDATE statement to perform the following tasks:
+--	-Compare an expression to the result of the query.
+--	-Determine if an expression is included in the results of the query.
+--	-Check whether the query selects any rows.
+
+--The subquery (inner query) executes once before the main query (outer query) executes.
+--The main query (outer query) use the subquery result.
+
+--SYNTAX:
+--	SELECT select_list
+--	FROM table
+--	WHERE expr operator (SELECT select_list
+--			     FROM table)
+--	;
+
+
+--TASKS:
+
+--BOOK_LIBRARY
+
+--1. Who is oldest customer?
+
+--2. Who are customers who did not borrowed anything?
+
+--3. What are title of the books
+--which price is more than 
+--the average price of the books which topic is Thriller,
+--Literature or History?
+
+
+--OLYMPICS
+--4. How many athletes were born before Cseh László?
+
+--5. Find those African countries that have more population than every European
+--country.
+
+--6. Which country has the most medals?
+
+
+
+
+-- Set operations. 
+-------------------------------------------
+--What are SQL Set Operators?
+--A set operator in SQL is a keyword that lets you 
+--combine the results of two queries into a single query.
+
+--Sometimes when working with SQL, you’ll have a need 
+--to query data from two more tables. But instead of 
+--joining these two tables, you’ll need to list the results
+--from both tables in a single result, or in different rows. 
+--That’s what set operators do.
+
+--The different set operators are:
+--	UNION
+--	UNION ALL
+--	MINUS
+--	INTERSECT
+
+
+--SYNTAX:
+--	SELECT your_select_query                   
+--	set_operator                                
+--	SELECT another_select_query; 
+
+--When selecting your columns, the number of columns needs 
+--to match between queries, and the data type of each column needs to be compatible.
+--The UNION ALL set operator also combines the results from two queries.
+--It’s very similar to UNION, but it does not remove duplicates.
+
+--1. List the names of the authors and customers in one list. 
+--Every name should be listed only one time.
+
+--2. List the names of the authors and customers in one list. 
+--If a name has more than on occasion, list it more times.
+
+--3. List the names of the authors who are not customers.
+
+--4. List the authors who are also customers.
+
+
+
+
+-- Top N analysis.
+---------------------------------------------------------------
+-- ROWNUM
+--For each row returned by a query, the ROWNUM pseudocolumn 
+--returns a number indicating the order in which Oracle selects 
+--the row from a table or set of joined rows. 
+--The first row selected has a ROWNUM of 1, the second has 2, and so on.
+
+select title, rownum 
+from book_library.books;
+
+--You can use ROWNUM to limit the number of rows returned by a query, as in this example:
+select title, rownum 
+from  BOOK_LIBRARY.books
+where rownum < 11;
+
+--If an ORDER BY clause follows ROWNUM in the same query, 
+--then the rows will be reordered by the ORDER BY clause. 
+select title, rownum 
+from  BOOK_LIBRARY.books
+where rownum < 11
+order by price;
+
+--If you embed the ORDER BY clause in a subquery and place 
+--the ROWNUM condition in the top-level query, 
+--then you can force the ROWNUM condition to be applied after the ordering of the rows.
+
+-- BOOK_LIBRARY
+
+-- List the first 5 customer’s name in alphabetical order.
+
+-------------        
+
+--FETCH FIRST n ROWS ONLY: 
+
+--SYNTAX:
+--SELECT select_list 
+--FROM table_name 
+--FETCH FIRST n ROWS ONLY;       (where n is a number)
+------------------------------------------------------------------------------------
+
+--FETCH FIRST n ROWS WITH TIES: 
+--handling duplicates. 
+--WITH TIES is therefore important if you want to include all 
+--rows of a certain kind – without stopping at a fixed number of rows.
+
+--SYNTAX
+--SELECT select_list 
+--FROM table_name 
+--FETCH FIRST n ROWS WITH TIES;       (where n is a number)
+
+--EXAMPLES:
+--List the first 10 author (only author_id and royalty) with the largest royalty.
+
+--List the first 5 book (only book_id and price) with the largest price.
+
+--List the book which has the highest price
+
+-----------------------------------------
+
+--OFFSET n ROWS FETCH NEXT m ROWS WITH TIES
+-- n - number
+-- m - number
+
+--List the authors by royalty ascending, 
+-- and list from it the second 5 authors.
+
+----------------------------------------------------------------------------------
+--PRACTICE:
+
+--OLYMPICS
+--1. List the names and birthdate of each athlete who was born before 1980.01.01
+
+--2. Select the names and the population densities of each country.
+
+--3. List all European countries.
+
+--4. List the countries whose population is higher than 1000000.
+
+--5. List the country names between Germany and Hungary.
+--Remark: 'between x and y' can be used for character sequences too!
+
+--6. List all countries except for Hungary, Germany and China
+
+--7. List the countries that have no capital.
+
+--8. Select the countries whose name has a double 'r' in it.
+-- rr
+
+--9. List those cities that have more than 5 athletes in alphabetical order.
+-- Remark: In the where you cannot place group functions!
+
+--10. How many countries have higher population density than 10?
+
+--------------------------------------------------------------------------------
+--BOOK_LIBRARY
+--1. Select the authors’ full names in one column 
+
+--2. List the books which (topic is Science Fiction or Literature) or
+--which (price is between 1000 and 4000) 
+--and (which number of pages is given).
+--Sort the list by topic descending and number of pages ascending.
+
+--3. What are the minimum price, the maximum price, the sum of
+--the prices and the average of the prices of books for each publisher?
+
+--4. List the titles of the books and the name of their 
+-- authors of which were born earlier than 1940.
+
+--5. How many authors are there in the author table whose birth
+--date is not given?
+
+--6. List the title of the books which title contain at least two ’e’
+--characters (case-insensitive) or which second letter is ’o’. Sort the list by
+--title.
+
+--7. In the thriller topic which book has the lowest price?
+
+--8. List the authors(name, birth_date, age) who are older than 100 years;
+
+--9. List the authors (name, birth_date)
+--who was born in May or July or November.
+--Order the list by month desc and the name of the author;
+
+--10. List the customers (name, birth_date, category)
+--who were born between 1980 and 1999
+--and whose category is adult or supporter
+--or whose name contains puntually two 'e' (lowercase or uppercase).
+--List should be sorted by category,and birth_date desc;
+
+--11. List the books which are under 30 years 
+--and which topic is not given. 
+                 
+-------------------------------------------
+
+--OLYMPICS DATABASE:
+
+--1. How many countries have higher population density than 2? 
+--   (pop.density=population divided by area)
+
+--2. List the athletes' names, birthplaces and the countries they come from.
+
+--3. List the names of the countries and the numbers of medals (gold,silver,bronze)
+--   they earned.
+
+--4. List the Asian and the European countries.			
+
+--5. Select the countries whose name has a 'g' in it.
+
+--6. Select those individual athletes who were born after 1990.02.01.
+
+--7. List the average population for each continent.
+
+--8. How many countries are there in each continent? List only those continents
+--where this value is more than 20. Do not display the continents that have NULL
+--value.
+
+--9. List the athletes' names, birthplaces and the countries they come from.
+
+--10. Display only those where this value is more than 1!
+
+--11.  List those European athletes who earned a medal.
+
+--12. Which countries have higher population than that of Hungary?
+
+--13. List those countries that are not in the medal table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

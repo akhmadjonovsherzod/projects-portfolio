@@ -1,0 +1,114 @@
+/* 
+This is a
+multiline comment.
+*/ 
+
+-- One line comment.
+
+
+--SQL: Structured Query Language
+-- - DDL: data definition language: create, alter, drop
+-- - DML: data manupulation language: insert, update, delete
+-- - Query language: select 
+-- - DCL: data control language 
+--  *transaction handling: commit, rollback, savepoint
+--  * privilege handling: grant, revoke;
+
+-- the semicolon (;) is not part of the statement
+-- Run statement: ctrl+enter
+
+--Use a SELECT statement or subquery to retrieve data from one or more tables.
+-- SELECT column1, column2, ...
+-- FROM table_name;
+
+--List all books from book_library
+select *
+from book_library.books;
+
+select title
+from book_library.books;
+
+
+select first_name, last_name
+from book_library.authors;
+
+--List the titles and prices from book_library 
+select title, price
+from book_library.books;
+--Concatenation
+
+--List the names of the customers. 
+select first_name, last_name
+from book_library.customers;
+
+--Use the ORDER BY clause to specify the order in which cells on the left-hand
+--side of the rule are to be evaluated.
+--You can specify an ascending (asc or nothing) or a descending (desc) order.
+--You can specify whether returned rows containing null values should appear
+--first or last in the ordering sequence with NULLS FIRST or NULLS LAST
+--clause.
+
+--descending
+select book_id, theoretical_value
+from book_library.book_items
+order by theoretical_value desc;
+
+--ascending
+select book_id, theoretical_value
+from book_library.book_items
+order by theoretical_value asc;
+
+select book_id, theoretical_value
+from book_library.book_items
+order by theoretical_value;
+
+
+----
+select book_id, theoretical_value
+from book_library.book_items
+order by theoretical_value desc nulls last;
+
+select book_id, theoretical_value
+from book_library.book_items
+order by theoretical_value asc nulls first;
+
+--List the books. Sort the list by number of pages ascending. Put the rows to the beggining 
+--of the list where the number of pages is not given.
+--nulls first 
+select title, number_of_pages 
+from book_library.books
+order by number_of_pages nulls first;
+
+--List the books. Sort the list by prices ascending. 
+--Put the rows to the end of the list where the prices is not given.
+--nulls last 
+select *
+from book_library.books
+order by price nulls last;
+
+
+-- The WHERE condition lets you restrict the rows selected to those that satisfy
+--one or more conditions.
+
+-- topic is History
+select title, topic 
+from book_library.books
+where topic='History';
+
+
+select title, topic 
+from book_library.books
+where topic!='History';
+
+-- price is less than 2000
+
+
+--price is less or equal than 2000
+
+
+--AND
+--OR
+
+--is null
+
+--is not null

@@ -1,0 +1,279 @@
+--OLYMPICS DATABASE:
+
+--1. How many countries have higher population density than 2? 
+--   (pop.density=population divided by area)
+
+--2. List the athletes' names, birthplaces and the countries they come from.
+
+--3. List the names of the countries and the numbers of medals (gold,silver,bronze)
+--   they earned.
+
+--4. List the Asian and the European countries.			
+
+--5. Select the countries whose name has a 'g' in it.
+
+--6. Select those individual athletes who were born after 1990.02.01.
+
+--7. List the average population for each continent.
+
+--8. How many countries are there in each continent? List only those continents
+--where this value is more than 20. Do not display the continents that have NULL
+--value.
+
+--9. List the athletes' names, birthplaces and the countries they come from.
+
+--10. Display only those where this value is more than 1!
+
+--11.  List those European athletes who earned a medal.
+
+--12. Which countries have higher population than that of Hungary?
+
+--13. List those countries that are not in the medal table.
+
+
+
+-----------------------------------------------------------------------
+--SQL:
+--DML (Data Manipulation Language): delete, insert, update
+--DDL (Data Definition Language): create, drop, alter, truncate, rename
+--Transaction Control Statements: commit, rollback, savepoint
+
+--Table names and column names must:
+--  - Begin with a letter
+--  - Be 1-30 characters long
+--  - Contain only A-Z, a-z, 0-9, _, $, and #
+--  - Not duplicate the name of another object owned by the same user
+--  - Not be an Oracle server-reserved word
+
+--You must have:
+--  - The CREATE TABLE privilege
+--  - A storage area
+--You specify:
+--  - The table name
+--  - The column name, column data type, and column size
+
+--You can use constraints to do the following:
+--  - Enforce rules on the data in a table whenever a row is inserted, updated, or deleted from that
+--      table. The constraint must be satisfied for the operation to succeed.
+--  - Prevent the deletion of a table if there are dependencies from other tables.
+--  - You can name a constraint, or the Oracle server generates a name by using the SYS_Cn format.
+
+--Constraints:
+--1. NOT NULL Specifies that the column cannot contain a null value
+--2. UNIQUE Specifies a column or combination of columns whose values must be unique for all rows in the table
+--3. PRIMARY KEY Uniquely identifies each row of the table
+--4. FOREIGN KEY Establishes and enforces a referential integrity between the
+--column and a column of the referenced table such that values in one table match values in another table.
+--5. CHECK Specifies a condition that must be true 
+
+--Data Types
+--NUMBER[(p[,s])]: 
+-- Numeric data, that is, a number. It ranges from 10–130 to 10126
+-- Its representation is usually fixed-point. p specifies the precision of the number, i.e., the
+-- maximum number of significant decimal digits. Its value can range from 1 to 38. s is
+-- the number of digits in the fractional part. Its value can range from –84 to 127. If
+-- negative, it specifies how many digits of the whole part should be rounded (for example,
+-- –2 rounds to hundreds). If s is not specified, it is treated as 0, i.e., it means an integer.
+-- If p is not specified either, then it represents a floating-point number with maximum
+-- range and precision.
+--CHAR[(n [{BYTE|CHAR}])]: 
+-- A fixed-size string with a length of n bytes or characters. 
+-- n defaults to 1 and has a maximum value of 2000. Strings shorter than n are
+-- padded with spaces.
+--VARCHAR2(n [{BYTE|CHAR}]):
+-- A variable-size string with a maximum length of
+-- n bytes or characters. The maximum value of n is at least 4000.
+--DATE:
+-- Date and time. Its range extends from 4712 BC to 9999 AD. It stores year, month,
+-- day, hour, minute, and second. However, it does not store fractions of seconds or time
+-- zone information. Its size is fixed at 7 bytes.
+
+-----------------------------------------------
+--ALTER TABLE:
+--The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+--The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+--SYNTAX: 
+--ADD COLUMN:
+--ALTER TABLE table_name
+--ADD column_name datatype;
+
+--DROP COLUMN:
+--ALTER TABLE table_name
+--DROP COLUMN column_name;
+
+--RENAME COLUMN:
+--ALTER TABLE table_name
+--RENAME COLUMN old_name to new_name;
+
+--ALTER COLUMN:
+--ALTER TABLE table_name
+--ALTER COLUMN column_name datatype;
+
+------------------------------------------------------
+--DROP TABLE:
+--The DROP TABLE statement is used to drop an existing table in a database.
+
+--Syntax
+--DROP TABLE table_name;
+
+
+------------------------------------------------------
+--TRUNCATE TABLE:
+--The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+--Syntax
+--TRUNCATE TABLE table_name;
+
+
+----------------------------------------------------
+--Create a copy of the athletes table.
+
+--Delete the table
+
+--Finalize (save) the changes
+
+--Create a table named tryout. It should have only one column:
+--name which type is string.
+
+-- Drop the tryout table.
+
+
+
+---------------------------------
+
+--INSERT INTO
+--The INSERT INTO statement is used to insert new records in a table.
+
+--INSERT INTO Syntax
+--It is possible to write the INSERT INTO statement in two ways:
+
+--  1. Specify both the column names and the values to be inserted:
+
+--      INSERT INTO table_name (column1, column2, column3, ...)
+--      VALUES (value1, value2, value3, ...);
+
+--  2. If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. However, make sure the order of the values is in the same order as the columns in the table. Here, the INSERT INTO syntax would be as follows:
+
+--      INSERT INTO table_name
+--      VALUES (value1, value2, value3, ...);
+
+
+
+--Copy the OLYMPICS.O_RESULTS table.
+
+--Let the primary key in the results_copy table be 
+--the athlete_id and the event_id together.
+
+
+---------------------------------------------------------
+/*Create a table called o_sponsors. The columns of the table are:
+-id (max. 5 digit number), 
+-name (char. sequence, max. 30 characters long), 
+-headquarter (char. sequence, max 30 long). 
+Let the primary key be the id column. The name column must be filled. 
+The name and headquarter columns together must be unique.
+*/
+
+
+
+/*Create a table called o_sponsorships. The columns are: 
+1. athlete_id (max. 5 digit number)
+2. event_id (max. 5 digit number)
+3. sponsor_id, max. 5 digit number which is a 
+   foreign key referencing to the
+primary key of the o_sponsors table.
+4. sum (max. 10 digit number,its default 
+   value is 1.000.000 and it cannot be less than 50000)
+5. s_date (date type, must be filled). 
+
+The athlete_id and the event_id form a foreign key referencing to 
+the primary key of the results_copy table
+The primary key of the table contains the following columns: 
+athlete_id, event_id,sponsor_id,s_date.
+*/
+
+
+--Add a new column to the o_sponsors table. The name of the new column is date_of_founding and its data type is date.
+
+--Delete the date_of_founding column from the sponsors table.
+
+--Check the result of the alter table command.  
+   
+--Insert 2 rows into the table    
+
+
+
+
+
+
+
+
+------------------------------------------------
+--UPDATE
+--The UPDATE statement is used to modify the existing records in a table.
+
+--UPDATE Syntax
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+
+---------------------------------------------------------------------------
+--DELETE
+--The DELETE statement is used to delete existing records in a table.
+
+--DELETE Syntax
+DELETE 
+FROM table_name 
+WHERE condition;
+
+
+---------------------------------------------------------------------------
+--1. Change content of the table that way that the 
+--theoracical values of the book_items should be multiplied by 10;
+
+--2. Change content of the table that way that the theoratical values of the book_items 
+--should be increased by the price of the book where the book is published after 2000;
+                          
+--3. Delete the rows from the writing where the authors was born after 1900.;
+
+--4. Delete the books which has no writing;
+
+--5. Delete the book_items which theoretical value is less
+--than the price of the related book;
+                     
+--6. Delete the last borrowing ;
+
+--7. Update the theoretical value of the book_items
+--which topic is Thriller. The theoretical value 
+--should be increased by the price divided by the num_of_pages
+--of the related book.
+                   
+--8. Decrease the royalty of the oldest author with the
+--price of the connected book;
+                                    
+--9. Insert a new row into the writing table in which Agatha
+--Christie writes the book which has the highest price , she gets
+--2000 FT royalty;
+
+
+-------------------------------------------------------------------
+--VIEW 
+--In SQL, a view is a virtual table based on the result-set of an SQL statement.
+--A view contains rows and columns, just like a real table. 
+--The fields in a view are fields from one or more real tables in the database.
+--You can add SQL statements and functions to a view and present the data as
+--if the data were coming from one single table.
+--A view is created with the CREATE VIEW statement. 
+
+--CREATE VIEW Syntax
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+
+--1. Create a view which lists the title, isbn and price per page of
+--the books which topic is thriller.
+
+--2. Create a view which lists the last 10 borrowing with the customer name and the book title.

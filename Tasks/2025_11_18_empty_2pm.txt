@@ -1,0 +1,306 @@
+
+-----OLYMPICS
+--1. Return the name of each country which is located in the same continent as Hungary. Omit Hungary from the output.
+
+-- Solve the exercise joining tables.
+
+-- Solve the exercise using subselects.
+
+--2. Return the name and the medals of each country which gained more medals than the average.
+
+--3. Return the name, continent and population of each country which is in the same continent as Hungary and its population is greater or equal to the population of Hungary. Order the countries by their population in descending order.
+
+--4. Return the name of each African country which starts with the same letter as any European country.
+
+--5. Return the name of each country which scored 51, 36 or 14 gold medals
+
+--6. Return the name, continent and population of each country which has the greatest population in its continent.
+
+-- ANY, ALL, EXISTS 
+
+-- The ANY operator:
+--	returns a boolean value as a result
+--	returns TRUE if ANY of the subquery values meet the condition
+-- ANY means that the condition will be true if the operation is true for any of the values in the range.
+
+-- The ALL operator:
+--	returns a boolean value as a result
+--	returns TRUE if ALL of the subquery values meet the condition
+--	is used with SELECT, WHERE and HAVING statements
+-- ALL means that the condition will be true only if the operation is true for all values in the range. 
+
+-- The EXISTS operator is used to test for the existence of any record in a subquery.
+-- The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+--7. Return the ID and name of those countries that have scored any medals (thus, they appear in the o_medal_table table).
+
+--8. Return each country that is the most populous on its continent.
+
+--9. Return each country that has greater population than one of the European countries has.
+
+--10. Return 5 countries having the greatest areas.
+
+--11. List those individual athletes (from the OLYMPICS.O_ATHLETES table) who
+--are older than the youngest Hungarian athlete.
+
+
+-----------------------------------------------------------------------
+--SQL:
+--DML (Data Manipulation Language): delete, insert, update
+--DDL (Data Definition Language): create, drop, alter, truncate, rename
+--Transaction Control Statements: commit, rollback, savepoint
+
+--Table names and column names must:
+--  - Begin with a letter
+--  - Be 1-30 characters long
+--  - Contain only A-Z, a-z, 0-9, _, $, and #
+--  - Not duplicate the name of another object owned by the same user
+--  - Not be an Oracle server-reserved word
+
+--You must have:
+--  - The CREATE TABLE privilege
+--  - A storage area
+--You specify:
+--  - The table name
+--  - The column name, column data type, and column size
+
+--You can use constraints to do the following:
+--  - Enforce rules on the data in a table whenever a row is inserted, updated, or deleted from that
+--      table. The constraint must be satisfied for the operation to succeed.
+--  - Prevent the deletion of a table if there are dependencies from other tables.
+--  - You can name a constraint, or the Oracle server generates a name by using the SYS_Cn format.
+
+--Constraints:
+--1. NOT NULL Specifies that the column cannot contain a null value
+--2. UNIQUE Specifies a column or combination of columns whose values must be unique for all rows in the table
+--3. PRIMARY KEY Uniquely identifies each row of the table
+--4. FOREIGN KEY Establishes and enforces a referential integrity between the
+--column and a column of the referenced table such that values in one table match values in another table.
+--5. CHECK Specifies a condition that must be true 
+
+--Data Types
+--NUMBER[(p[,s])]: 
+-- Numeric data, that is, a number. It ranges from 10–130 to 10126
+-- Its representation is usually fixed-point. p specifies the precision of the number, i.e., the
+-- maximum number of significant decimal digits. Its value can range from 1 to 38. s is
+-- the number of digits in the fractional part. Its value can range from –84 to 127. If
+-- negative, it specifies how many digits of the whole part should be rounded (for example,
+-- –2 rounds to hundreds). If s is not specified, it is treated as 0, i.e., it means an integer.
+-- If p is not specified either, then it represents a floating-point number with maximum
+-- range and precision.
+--CHAR[(n [{BYTE|CHAR}])]: 
+-- A fixed-size string with a length of n bytes or characters. 
+-- n defaults to 1 and has a maximum value of 2000. Strings shorter than n are
+-- padded with spaces.
+--VARCHAR2(n [{BYTE|CHAR}]):
+-- A variable-size string with a maximum length of
+-- n bytes or characters. The maximum value of n is at least 4000.
+--DATE:
+-- Date and time. Its range extends from 4712 BC to 9999 AD. It stores year, month,
+-- day, hour, minute, and second. However, it does not store fractions of seconds or time
+-- zone information. Its size is fixed at 7 bytes.
+
+-----------------------------------------------
+--ALTER TABLE:
+--The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+--The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+--SYNTAX: 
+--ADD COLUMN:
+--ALTER TABLE table_name
+--ADD column_name datatype;
+
+--DROP COLUMN:
+--ALTER TABLE table_name
+--DROP COLUMN column_name;
+
+--RENAME COLUMN:
+--ALTER TABLE table_name
+--RENAME COLUMN old_name to new_name;
+
+--ALTER COLUMN:
+--ALTER TABLE table_name
+--ALTER COLUMN column_name datatype;
+
+------------------------------------------------------
+--DROP TABLE:
+--The DROP TABLE statement is used to drop an existing table in a database.
+
+--Syntax
+--DROP TABLE table_name;
+
+----DROP TABLE table_name cascade constraints;
+
+------------------------------------------------------
+--TRUNCATE TABLE:
+--The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+--Syntax
+--TRUNCATE TABLE table_name;
+
+----------------------------------------------------
+--Create a copy of the athletes table.
+
+--Delete the table
+
+
+--Finalize (save) the changes
+
+
+--Create a table named tryout. It should have only one column:
+--name which type is string.
+
+-- Drop the tryout table.
+
+---------------------------------
+--INSERT INTO
+--The INSERT INTO statement is used to insert new records in a table.
+
+--INSERT INTO Syntax
+--It is possible to write the INSERT INTO statement in two ways:
+
+--  1. Specify both the column names and the values to be inserted:
+
+--      INSERT INTO table_name (column1, column2, column3, ...)
+--      VALUES (value1, value2, value3, ...);
+
+--  2. If you are adding values for all the columns of the table,
+--you do not need to specify the column names in the SQL query. 
+--However, make sure the order of the values is in the same order as the columns
+--in the table. Here, the INSERT INTO syntax would be as follows:
+
+--      INSERT INTO table_name
+--      VALUES (value1, value2, value3, ...);
+
+--create number_table
+--   id - number
+--   num - number
+
+--Copy the OLYMPICS.O_RESULTS table.
+
+
+commit;
+--Let the primary key in the results_copy table be 
+--the athlete_id and the event_id together.
+
+
+----------------------------
+-------------------------------------------------------------------
+--VIEW 
+--In SQL, a view is a virtual table based on the result-set of an SQL statement.
+--A view contains rows and columns, just like a real table. 
+--The fields in a view are fields from one or more real tables in the database.
+--You can add SQL statements and functions to a view and present the data as
+--if the data were coming from one single table.
+--A view is created with the CREATE VIEW statement. 
+
+--CREATE VIEW Syntax
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+
+--1. Create a view which lists the title, isbn and price per page of
+--the books which topic is thriller.
+
+--2. Create a view which lists the last 10 borrowing with the customer name and the book title.
+
+--3. Create a view which lists the title, isbn and price per page of the books which topic --is thriller. 
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+--Grant: 
+--SQL Grant command is specifically used to provide privileges 
+--to database objects for a user. 
+--This command also allows users to grant permissions to other users too. 
+
+--Syntax: 
+grant privilege_name on object_name to {user_name | public | role_name} 
+
+--Here privilege_name is which permission has to be granted, 
+--object_name is the name of the database object, 
+--user_name is the user to which access should be provided, 
+--the public is used to permit access to all the users. 
+
+--privilege_name: select, insert, update, delete, references, all
+
+
+--create numbers table.
+--example: 
+
+--Revoke: 
+--Revoke command withdraw user privileges on database objects if any granted. 
+--It does operations opposite to the Grant command. 
+--When a privilege is revoked from a particular user U, 
+--then the privileges granted to all other users by user U will be revoked. 
+
+--privilege_name: select, insert, update, delete, reference, all
+
+--Syntax: 
+revoke privilege_name on object_name
+from {user_name | public | role_name}
+
+--example:
+
+
+------------------------------------------------------
+
+--1. Create the tenant table with the following columns: 
+--   name: string 
+--   house id: numeric, 
+--   color of hair string. 
+--The primary key of the table is the house id and the name together. The house id is a --foreign key which refers to the primary key of the house table. 
+
+--2. Drop the constraint called tenant_fk of the tenant table. 
+
+--3. Drop the primary key of the tenant table. 
+
+--4. Add a primary key to the tenant table: the house id and the name together. 
+
+--5. Change the type of the name column of the tenant table: it should be maximum 50 --character long string. 
+
+--6. Rename the name column of the tenant table to name2; 
+
+
+--7. Create a table called Student
+
+--The columns of this table are:
+--   ID: number max 5 digits
+--   Name: char. sequence max 50, must be filled
+--   B_Date: date, must be filled
+--   Parent_ID: number max 6 digits
+--   Height: number max 3 digits.
+--The primary key of this is table is the ID column.
+--The height values cannot be more than 250. The default value is 170 for the height.
+--The Parent_ID is a foreign key referencing to the primary key of the HR.EMPLOYEES table.
+
+
+
+--8.  Create the house table with the following columns: id: numeric type, 
+--   name: string, it has to be filled, 
+--   date of build: date type, 
+--   zip code  fixed long string, 
+--   price: numeric type. 
+--The primary key of the table is the id.
+--The name should be unique in the table. The price should be more than 100
+--if it is filled.
+
+--9.  Add a new column to the house table: house size which type is numeric.
+
+--10. Drop the house size column of the house table.
+
+--11. Rename the house table to house2;
+
+----------------------------------
+-----BOOK_LIBRARY
+
+--1. List the name of the customer 
+--   who has the highest  late_fee.
+
+--2. List the second 3 book items which has largest theoretical value
+
+--3. Create a view which lists for each books (id, title)
+--   how many times was it borrowed.

@@ -1,0 +1,98 @@
+--------------------------------------------------------
+--SELECT column_name(s)
+--FROM table_name
+--[WHERE condition]
+--[GROUP BY column_name(s)]
+--[HAVING condition]
+--[ORDER BY column_name(s)];
+
+--desc, asc, nulls last, nulls first
+
+--concatenation -> ||
+--concat()
+
+--conditions in WHERE clause:
+--	<, >, =, <>, !=
+--	between X and y
+--	in, not in
+--	is null, is not null
+
+--The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+--There are two wildcards often used in conjunction with the LIKE operator:
+--     The percent sign (%) represents zero, one, or multiple characters
+--     The underscore sign (_) represents one, single character
+-- LIKE 
+
+-- AND
+-- OR
+
+--Functions:
+--	round()
+--	trunc()
+--	substr()
+--	instr()
+--	length()
+--	to_char()
+--	to_date()
+
+yyyy - year
+mm - month
+dd - day
+
+hh24 - hour
+mi - minute
+ss - second
+
+cc - century
+
+d - day of the week
+ddd - day of the year
+
+w - week of the month
+ww - week of the year
+
+day, Day, DAY, dy, Dy, DY
+
+month, Month, MONTH, mon, Mon, MON
+
+ds
+dl
+ts
+
+--Functions:
+--	month_between()
+--	extract(... from ...)
+--	lower()
+--	upper()
+--	replace()
+--	nvl()
+
+--	max()
+--	min()
+--	count()
+--	avg()
+--	sum()
+
+-- sysdate  - current system date and time
+
+-- subquery ! 
+
+-- distinct
+
+-- Set operators:
+--	UNION
+--	UNION ALL
+--	MINUS
+--	INTERSECT
+
+-- ROWNUM	
+
+-- INNER JOIN
+-- LEFT OUTER JOIN
+-- RIGHT OUTER JOIN 
+-- FULL OUTER JOIN
+
+-- FETCH FIRST n ROWS ONLY
+-- FETCH FIRST n ROWS WITH TIES
+-- OFFSET n ROWS FETCH NEXT m ROWS WITH TIES
