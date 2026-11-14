@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    database: retail_pipeline
+    schema: raw
+    tables:
+      - name: order_facts
+        description: >
+          Order-level facts loaded from S3, produced by the PySpark ETL job.
+          Already has window-function metrics (running spend, ranks) computed
+          upstream — this table is the entry point for the dbt layer.

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_order_facts
+    description: Cleaned, typed staging layer over the raw order_facts source.
+    columns:
+      - name: order_id
+        description: Primary key — one row per completed order.
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: channel
+        data_tests:
+          - accepted_values:
+              values: ['web', 'mobile', 'marketplace']
+      - name: order_net_total
+        data_tests:
+          - not_null

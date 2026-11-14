@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fct_monthly_channel_performance
+    description: Monthly revenue and order performance, split by channel and country.
+    columns:
+      - name: order_year_month
+        data_tests:
+          - not_null
+      - name: total_net_revenue
+        data_tests:
+          - not_null
+
+  - name: fct_customer_summary
+    description: One row per customer — lifetime order count, spend, and in-country spend rank.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+      - name: spend_rank_in_country
+        data_tests:
+          - not_null
