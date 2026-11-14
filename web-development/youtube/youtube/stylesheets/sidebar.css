@@ -1,0 +1,297 @@
+/* Main Sidebar */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 56px;
+  width: 240px;
+  z-index: 3;
+  padding-top: 8px;
+  padding-right: 0;
+  background-color: white;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/* Main Sidebar */
+
+/* Conatiner 1 */
+.sidebar-container-1 {
+  width: 100%;
+  height: 450px;
+}
+.sidebar-container-1-1 {
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 12px;
+}
+.sidebar-container-1-1 > a {
+  text-decoration: none;
+  color: black;
+}
+.sidebar-container-1-1 > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.sidebar-container-1-1 > a > div:hover {
+  background-color: #e5e5e5;
+}
+.sidebar-container-1-1 > a > div > img {
+  width: 24px;
+  height: 24px;
+}
+.sidebar-container-1-1 > a > div > span {
+  margin-left: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.sidebar-container-1-2 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ececec;
+}
+.sidebar-container-1-2 > a {
+  text-decoration: none;
+  color: black;
+}
+.sidebar-container-1-2 > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.sidebar-container-1-2 > a > div:hover {
+  background-color: #e5e5e5;
+}
+.sidebar-container-1-2 > a > div > img {
+  width: 24px;
+  height: 24px;
+}
+.sidebar-container-1-2 > a > div > span {
+  margin-left: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Contaier 1 end */
+
+/* Container 2 */
+.sidebar-container-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.subscriptions-div {
+  width: 100%;
+  height: 17px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.subscribed-channels > a {
+  width: 100%;
+}
+.subscribed-channels > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.subscribed-channels > a > div:hover {
+  background-color: #e5e5e5;
+}
+.subscribed-channels > a > div > img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.subscribed-channels > a > div > span {
+  margin-left: 24px;
+  color: black;
+  font-size: 14px;
+}
+
+/* Container 2 end */
+
+/* Container 3 */
+.sidebar-container-3 {
+  width: 100%;
+  height: 250px;
+  /* background-color: orange; */
+  border-bottom: 1px solid #e5e5e5;
+}
+.explore-div {
+  width: 100%;
+  height: 17px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.explore-channels > a {
+  width: 100%;
+}
+.explore-channels > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.explore-channels > a > div:hover {
+  background-color: #e5e5e5;
+}
+.explore-channels > a > div > img {
+  width: 24px;
+  height: 24px;
+}
+.explore-channels > a > div > span {
+  margin-left: 24px;
+  color: black;
+  font-size: 14px;
+}
+
+/* Container 3 end */
+
+/* Container 4 */
+.sidebar-container-4 {
+  width: 100%;
+  height: 193px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 16px;
+}
+
+.more-functions-title {
+  width: 100%;
+  height: 17px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px;
+  font-weight: 500;
+  font-size: 14px;
+}
+.more-functions-div > a {
+  width: 100%;
+}
+.more-functions-div > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.more-functions-div > a > div:hover {
+  background-color: #e5e5e5;
+}
+.more-functions-div > a > div > img {
+  width: 24px;
+  height: 24px;
+}
+.more-functions-div > a > div > span {
+  margin-left: 24px;
+  color: black;
+  font-size: 14px;
+}
+
+/* Container 4 end */
+
+/* Container 5 */
+.sidebar-container-5 {
+  width: 100%;
+  height: 176px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.all-sets > a {
+  width: 100%;
+}
+.all-sets > a > div {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 40px;
+}
+.all-sets > a > div:hover {
+  background-color: #e5e5e5;
+}
+.all-sets > a > div > img {
+  width: 24px;
+  height: 24px;
+}
+.all-sets > a > div > span {
+  margin-left: 24px;
+  color: black;
+  font-size: 14px;
+}
+
+/* Container 5 end */
+.footer {
+  width: 100%;
+  height: 187px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.top-footer {
+  width: 194px;
+  height: 54px;
+}
+.top-footer > a {
+  color: #aaa;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-right: 8px;
+}
+.middle-footer {
+  width: 192px;
+  height: 54px;
+  /* margin-top: 12px; */
+}
+.middle-footer > a {
+  color: #aaa;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-right: 8px;
+}
+.middle-footer > a:nth-child(3) {
+  display: block;
+}
+.middle-footer > a:nth-child(4) {
+  display: block;
+}
+.bottom-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: start;
+  align-items: flex-end;
+}
+.bottom-footer > p {
+  color: rgb(113, 113, 113);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* The end of Sidebar */
