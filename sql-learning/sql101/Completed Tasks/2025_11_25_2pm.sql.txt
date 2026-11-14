@@ -1,0 +1,232 @@
+--------------------------------------------------------
+--SELECT column_name(s)
+--FROM table_name
+--[WHERE condition]
+--[GROUP BY column_name(s)]
+--[HAVING condition]
+--[ORDER BY column_name(s)];
+
+--desc, asc, nulls last, nulls first
+
+--concatenation -> ||
+--concat()
+
+--conditions in WHERE clause:
+--	<, >, =, <>, !=
+--	between X and y
+--	in, not in
+--	is null, is not null
+
+--The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+--There are two wildcards often used in conjunction with the LIKE operator:
+--     The percent sign (%) represents zero, one, or multiple characters
+--     The underscore sign (_) represents one, single character
+-- LIKE 
+
+-- AND
+-- OR
+
+--Functions:
+--	round()
+--	trunc()
+--	substr()
+--	instr()
+--	length()
+--	to_char()
+--	to_date()
+
+yyyy - year
+mm - month
+dd - day
+
+hh24 - hour
+mi - minute
+ss - second
+
+cc - century
+
+d - day of the week
+ddd - day of the year
+
+w - week of the month
+ww - week of the year
+
+day, Day, DAY, dy, Dy, DY
+
+month, Month, MONTH, mon, Mon, MON
+
+ds
+dl
+ts
+
+--Functions:
+--	month_between()
+--	extract(... from ...)
+--	lower()
+--	upper()
+--	replace()
+--	nvl()
+
+--	max()
+--	min()
+--	count()
+--	avg()
+--	sum()
+
+-- sysdate  - current system date and time
+
+-- subquery ! 
+
+-- distinct
+
+-- Set operators:
+--	UNION
+--	UNION ALL
+--	MINUS
+--	INTERSECT
+
+-- ROWNUM	
+
+-- INNER JOIN
+-- LEFT OUTER JOIN
+-- RIGHT OUTER JOIN 
+-- FULL OUTER JOIN
+
+-- FETCH FIRST n ROWS ONLY
+-- FETCH FIRST n ROWS WITH TIES
+-- OFFSET n ROWS FETCH NEXT m ROWS WITH TIES
+
+
+--CREATE VIEW view_name AS 
+-----------------------------------------
+--PRACTICE
+-- 1. Who is the author (author id) of the book which title is Napoleon?
+select author_id
+from book_library.writing
+where book_id in (select book_id from book_library.books where title='Napoleon')
+;
+
+select author_id
+from book_library.books book inner join book_library.writing write on book.book_id=write.book_id
+where title='Napoleon'
+;
+--2. Which books has less than 3 items?
+select book.book_id, count(book_item_id), title
+from book_library.books book left join book_library.book_items item on book.book_id=item.book_id
+group by book.book_id, title
+having count(book_item_id)<3
+;
+
+--3.List the customer whose is more than 20 years and who bor-
+--rows the book (and they did not bring back) which theoretical value is not
+--null?
+select cu.*, months_between(sysdate, cu.birth_date)/12 
+from book_library.customers cu inner join book_library.borrowing borr on cu.library_card_number=borr.customer_id
+inner join book_library.book_items item on borr.book_item_id=item.book_item_id
+where months_between(sysdate, cu.birth_date)/12>20 and item.theoretical_value is not null
+and borr.bring_back_date is null
+;
+--4.List the name, birth date and category of all customers whose
+--category is student, adult or supporter and the book item ids which they borrowed
+--if they did any. Sort the list by the name of the customers and by the
+--book item id.
+select first_name||' '||last_name, birth_date, category, book_item_id
+from book_library.customers cu left join book_library.borrowing borr on cu.library_card_number=borr.customer_id
+where lower(category) in ('student', 'adult', 'supporter')
+order by first_name, last_name, book_item_id
+;
+--5.List the title of the books which title contain at least two ’e’
+--characters (case-insensitive) or which second letter is ’o’. Sort the list by
+--title.
+select title
+from book_library.books
+where lower(title) like '%e%e%'
+or lower(title) like '_o%'
+order by title;
+--6.Create a view which lists the title, isbn and price per page of the books 
+--which topic is science and the isbn starts with 96 
+create view Science_books as
+select title, isbn, price/number_of_pages as "price_per_page"
+from book_library.books
+where topic='Science'
+and isbn like '96%'
+;
+--7.List the female or pensioner customers. Sort the list by gender descending. 
+select *
+from book_library.customers 
+where lower(gender)='f' or lower(category)='pensioner'
+order by gender desc
+;
+--8.List the books which title contains at least one 0 character. 
+select *
+from book_library.books 
+where title like '%0%'
+;
+--9.List the books which titles third character is 'a'. 
+select *
+from book_library.books
+where lower(title) like '__a%';
+--10.What is theoretical value and the book item id of the book items whose book id is 1116152201? 
+--Sort the list by the theoretical value descending. 
+select theoretical_value, book_item_id
+from book_library.book_items
+where book_id = 1116152201
+order  by theoretical_value desc
+;
+--11. List the title of the books which number of pages is between 150 and 200 or whose 
+--publisher is neither Arrow nor Signet and nor Apress? Sort the list. 
+select title, number_of_pages, publisher
+from book_library.books
+where number_of_pages between 150 and 200  
+or lower(publisher) not in ('arrow', 'signet', 'apress')
+order by title;
+--12. List the title of the books. Put the 1 value into the second. 
+--Put the a letter into the third column and into the last column put the current date and time. 
+select title, 1, 'a', to_char(sysdate, 'yyyy.mm.dd hh24:mi:ss') as "date and time"
+from book_library.books;
+--13. List the address of customers, and the substring of the address from the 3rd character to the 7th character.
+select address, substr(address, 3, 5)
+from book_library.customers;
+--14. List the address of customers, and in the second column replace the Str string in the address to the ******. 
+select address, replace(lower(address), 'str', '******')
+from  book_library.customers
+;
+--15. List the address of customers, and in the second column the number 
+--of the character from which the Str string starts. 
+select address, instr(lower(address), 'str')
+from book_library.customers
+;
+
+select address, substr(address, instr(lower(address), 'debrecen'), 8)
+from book_library.customers
+where substr(address, instr(lower(address), 'debrecen'), 8) ='Debrecen';
+--16. List the address of customers, and in the second column the number of the character in the address. 
+select address, length(address)
+from book_library.customers;
+--17. List the topics of the books. In the second column list again the topics, 
+--but if the topic is null list ****** instead of it. 
+select topic, nvl(topic, '******')
+from book_library.books
+;
+--18. List the name and birth date of the customers who was born earlier than 1st January, 2000. 
+select first_name, last_name, to_char(birth_Date, 'yyyy.mm.dd')
+from book_library.customers
+where to_char(birth_Date, 'yyyy.mm.dd') < '2000.01.01';
+
+select first_name, last_name, to_char(birth_Date, 'yyyy.mm.dd')
+from book_library.customers
+where birth_Date < to_Date('2000.01.01', 'yyyy.mm.dd')
+;
+--19. List the date which is 2 months later than the current date. 
+select add_months(sysdate, 2), to_char(add_months(sysdate,2), 'yyyy.mm.dd')
+from dual
+;
+--20. How many years did pass away from 1st January, 2000? 
+select trunc(months_between(sysdate, to_date('2000.01.01', 'yyyy.mm.dd'))/12) as "years between 2000 and 2025"
+from dual
+;
+--21. List the date which is 3 years later than the current date. 
+select add_months(sysdate, 2), to_char(add_months(sysdate,3*12), 'yyyy.mm.dd')
+from dual
+;

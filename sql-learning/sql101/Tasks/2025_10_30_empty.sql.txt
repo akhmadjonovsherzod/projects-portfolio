@@ -1,0 +1,113 @@
+--1. Return the data of each event that is organized for women.
+
+--2. Return the ID and the number of medals of each country which has at least 1 gold medal.
+
+--3. Return the ID and the number of medals of each country which gained exactly the same number of gold and silver medals.
+
+--4. Return the ID and the number of medals of each country which gained exactly the same number of gold, silver and bronze medals.
+
+--5. Return the ID and the number of medals of each country which has not gained any gold nor any silver medals.
+
+--6. Return the ID and the number of medals of each country which has not gained any gold nor any silver medals but gained bronze medals.
+
+--7. Return the ID and the number of medals of each country which has zero gold or zero silver medal while gained at least 1 bronze medal.
+
+--8. Return the ID and the number of medals of each country which has gained more than 10 gold and silver medals (total).
+
+--9. Return the ID and the number of medals of each country which has gained more than 10 gold and silver medals (total). Name the number of medals as total.
+
+
+--BETWEEN
+
+--10. Return the ID and the number of medals of each country which number of gold medals is between 5 and 9.
+
+--or
+
+--11. Return the ID and the number of medals of each country which number of gold medals is between the number of bronze and silver medals.
+
+--12. Return all the data of each event which name is missing.
+
+--13. Return each gender for which an event is scheduled with a missing name.
+
+--14. Return each gender for which an event is scheduled with a missing name. Return each gender only once.
+
+‐-----------
+--Pattern matching
+
+--1. Return each country.
+
+--2. Return the country which name matches Albania.
+
+--3. Return the country which name matches albania.
+
+--4. Return each country which name starts with 'A'.
+
+--5. Return each country which name starts with 'A', continues with a custom character, then ends with 'gola'.
+
+--6. Return each country which name ends with 'istan'.
+
+--7. Return each country which name starts with 'A' and ends with 'istan'.
+
+--8. Return each country which name starts with 'A', ends with 'a' and exactly 5 letters long.
+
+--9. Return each country which name starts with 'A' and at least 8 letters long.
+
+--10. Return each country which name starts with 'Aust' and ends with 'ia'.
+
+--11. Return each country which name starts with 'Aust' or ends with 'ia'.
+
+--12. Return each country which area starts with '3'.
+
+-----------
+--Sorting
+--Basic exercises
+--1. Return the ID and the number of medals of each country. Sort the countries by the number of gold medals.
+
+--2. Return the ID and the number of medals of each country. Sort the countries by the number of gold medals in descending order.
+
+--3. Return the ID and the number of medals of each country. Sort the countries by the number of gold medals in descending order. If two countries gained the same number of gold medals, sort them by the number of their silver medals.
+
+--4. Return the ID and the number of medals of each country. Sort the countries by the number of gold medals in descending order. If two countries gained the same number of gold medals, sort them by the number of their silver medals in descending order.
+
+--5. Return the ID and the number of medals of each country. Sort the countries by the total number of their medals in descending order. If two countries gained the same number of medals, sort them by the number of their silver medals in ascending order.
+
+--6. Return all the data of each discipline. Sort them by their names.
+
+--7. Return all the data of each discipline. Sort them by their names in descending order.
+
+--Combined exercises
+
+--8. Return the ID and the number of medals of each country which has gained more then 10 medals (total). Name the number of medals as total. Sort the countries by the number of their medals.
+
+-----------
+--Aggregation
+
+-- The MIN() function returns the smallest value of the selected column.
+-- The MAX() function returns the largest value of the selected column.
+-- The COUNT() function returns the number of rows that matches a specified criterion.
+-- The AVG() function returns the average value of a numeric column. 
+-- The SUM() function returns the total sum of a numeric column. 
+
+
+
+--COUNT()
+
+--1. Return the number of sport events.
+
+--2. Return the number of distinct genders in the o_sport_events table.
+
+--3. Return the number of distinct names in the o_sport_events table.
+
+--4. Return the number of distinct genders and names in the o_sport_events table.
+
+--5. Return the number of distinct genders and names in the o_sport_events table. Use the names genders and names for the columns.
+
+--MIN(), MAX() and AVG()
+
+--6. Return the minimum, maximum and average number of gold medals scored by a country.
+
+--7. Return the first and the last date on which an athlete was born.
+
+--8. Return the athletes' name which is the first or last in alphabetic order.
+
+--9. Return the minimum, maximum and average number of medals scored by a country (total).

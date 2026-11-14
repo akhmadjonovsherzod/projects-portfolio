@@ -1,0 +1,306 @@
+-- GROUP BY
+-- The SQL GROUP BY Statement
+-- The GROUP BY statement groups rows that have the same values into 
+-- summary rows, like "find the number of customers in each country".
+
+-- The GROUP BY statement is often used with 
+-- aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group 
+-- the result-set by one or more columns.
+
+-- GROUP BY Syntax
+--	SELECT column_name(s)
+--	FROM table_name
+--	[WHERE condition]
+--	[GROUP BY column_name(s)]
+--	[ORDER BY column_name(s)];
+
+
+
+-- HAVING
+
+-- The SQL HAVING Clause
+-- The HAVING clause was added to SQL because the WHERE keyword 
+-- cannot be used with aggregate --functions.
+
+
+-- HAVING Syntax
+--	SELECT column_name(s)
+--	FROM table_name
+--	[WHERE condition]
+--	[GROUP BY column_name(s)]
+--	[HAVING condition]
+--	[ORDER BY column_name(s)];
+
+---------------------------------------------------------------
+--1. Return the number of events by genders.
+select count(*), gender
+from olympics.o_sport_events
+group by gender
+;
+--2. Return the number of events by names.
+select count(*), name
+from olympics.o_sport_events
+group by name
+;
+--3. Return the number of countries by continents.
+select count(*), count(name), continent
+from olympics.o_countries
+group by continent
+;
+--4. Return the number of countries by continents. Omit the NULL value from the output.
+select count(*), count(name), continent
+from olympics.o_countries
+where continent is not null
+group by continent
+;
+
+select count(*), count(name), continent
+from olympics.o_countries
+group by continent
+having continent is not null
+;
+--5. Return the number of countries by continents. Return a continent only if it has more than 30 countries.
+select count(*), continent
+from olympics.o_countries
+group by continent
+having count(*)>30
+;
+
+--6. Return the name of each continent, and the minimum, maximum and average of the area.
+select continent, min(area), max(area), avg(area)
+from olympics.o_countries
+group by continent;
+--7. Return a continent only if the average population is less than 2million.
+select avg(population), continent
+from olympics.o_countries
+group by continent
+HAVING avg(population)<2000000
+;
+--8. Return the name of each continent and the number of countries. 
+--Return a continent only if the average population is less than 2million.
+select avg(population), continent, count(*)
+from olympics.o_countries
+group by continent
+HAVING avg(population)<2000000
+;
+
+--9. Return the number of events of each name and gender combination.
+select count(*), gender, name
+from olympics.o_sport_events
+group by name, gender
+;
+
+---------------------------
+--NVL()
+-- The NVL() function allows you to replace null
+-- with a more meaningful alternative in the results of a query.
+
+
+--1. Return the name, the population and the continent of country Cook Islands.
+select name, population, continent
+from olympics.o_countries
+where name='Cook Islands'
+;
+--2. Return the name, the population and the continent of country Cook Islands. 
+--Replace the missing continent name with string 'unknown'.
+select name, population, nvl(continent, 'unknown'), nvl(continent, 0)
+from olympics.o_countries
+where name='Cook Islands'
+;
+--3. Return the name, the population and the continent of each country. 
+--Replace the missing continent names with string 'unknown'.
+select name, population, nvl(continent, 'unknown'), continent
+from olympics.o_countries
+;
+--4. Return the name, the population and the continent of each country. 
+--Replace the missing continent names with string 'unknown' and the missing population values with 0.
+select name, nvl(population, 0), population, nvl(continent, 'unknown')
+from olympics.o_countries
+;
+
+------------------------------------------
+--LOWER(), UPPER(), INITCAP()
+-- lower()  - Convert the text to lower-case
+-- upper()  - Convert the text to upper-case
+
+--examples
+select name, lower(name), upper(name), initcap(name)
+from olympics.o_sport_events
+;
+
+--CONCATENATION
+select name, birthplace, name||' '||birthplace
+from olympics.o_athletes
+;
+--examples
+
+--CONCAT()
+--example
+select name, birthplace, concat(name,concat(' ',birthplace))
+from olympics.o_athletes
+;
+----------------------------------------
+--SUBSTR()
+
+--syntax:
+--substr(column_name, start_position, number_of_char.)
+
+select birthplace, substr(birthplace, 3, 5 )
+from olympics.o_athletes
+;
+
+select birthplace, substr(birthplace, 3 )
+from olympics.o_athletes
+;
+
+select birthplace, substr(birthplace, -2 )
+from olympics.o_athletes
+;
+
+select birthplace, substr(birthplace, -5, 4 )
+from olympics.o_athletes
+;
+
+--example
+
+-------------------------------------
+--DUAL Table:
+--The DUAL is special one row, one column table present by default in all Oracle databases.
+--The owner of DUAL is SYS (SYS owns 
+--the data dictionary, therefore DUAL is part of the data dictionary.) but DUAL can be accessed by every user. The table has a 
+--single VARCHAR2(1) column called DUMMY that has a value of 'X'.
+--There may be a situation where we want to query something that is not from a table. For example, getting the current date or 
+--querying a simple arithmetic expression like 2+2.
+
+Examples: 
+select 2*3 
+from dual;
+
+-------------------------------------
+--REPLACE()
+-- The REPLACE() function replaces all occurrences 
+-- of a substring within a string, with a new substring.
+-- Syntax:
+-- REPLACE(string, old_string, new_string)
+select title, replace(lower(title), 'the', 'ABCD')
+from book_library.books;
+
+--example
+
+select 'apple', replace('apple', 'le', 'XYZ')
+from dual;
+
+select 'apple', replace('apple', 'p', 'XYZ')
+from dual;
+
+--------------------------------
+--INSTR()
+--syntax: instr(string, substring)
+--example
+select 'coconut', instr('coconut', 'oco')
+from dual;
+
+-----------------------------------------
+--Date functions
+--SYSDATE
+
+--example
+
+SELECT SYSDATE
+FROM dual;
+
+--MONTHS_BETWEEN()
+select months_between(birth_date, sysdate), months_between(sysdate, birth_date)/12
+from book_library.authors
+;
+--example
+
+--ADD_MONTHS()
+
+--example
+select add_months(sysdate, 5)
+from dual
+;
+
+select birth_date, add_months(birth_date, 3)
+from book_library.authors
+;
+--NEXT_DAY()
+
+--example
+select birth_date, next_day(birth_date, 1)
+from book_library.authors
+;
+
+--LAST_DAY()
+--example
+select birth_date, last_day(birth_date)
+from book_library.authors
+;
+
+--EXTRACT()
+--example
+select birth_Date, extract(month from birth_date)
+from book_library.authors;
+
+select birth_Date, extract(year from birth_date)
+from book_library.authors;
+
+select birth_Date, extract(day from birth_date)
+from book_library.authors;
+----------------------------
+-- TO_CHAR function converts DATETIME or DATE values to character string values.
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'dd/mm/yyyy')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd hh24:mi:ss')
+from book_library.authors
+;
+select birth_Date, to_char(birth_date, 'cc')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd   d ')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd ddd')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd  w')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd  ww')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd  day DAY Day   dy DY Dy')
+from book_library.authors
+;
+
+select birth_Date, to_char(birth_date, 'yyyy.mm.dd month MONTH Month  mon MON Mon')
+from book_library.authors
+;
+select birth_Date, to_char(birth_date, 'ds')
+from book_library.authors
+;
+select birth_Date, to_char(birth_date, 'ts')
+from book_library.authors
+;
+select birth_Date, to_char(birth_date, 'dl')
+from book_library.authors
+;
+-- TO_DATE function converts date strings in various formats to a date integer value, with data type DATE.
+select to_date('1754.01.15 20:15:01', 'yyyy.mm.dd hh24:mi:ss')
+from dual;
+
+
+select to_char(to_date('1754.01.15 20:15:01', 'yyyy.mm.dd hh24:mi:ss'), 'hh24:mi:ss yyyy.mm.dd')
+from dual;

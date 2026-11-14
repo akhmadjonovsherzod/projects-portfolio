@@ -1,0 +1,172 @@
+--JOIN:
+-------
+--(We use the join operator when we need data from multiple tables.)
+
+--A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+
+--Here are the different types of the JOINs in SQL:
+
+-- - INNER JOIN: Returns records that have matching values in both tables
+-- - LEFT OUTER JOIN: Returns all records from the left table, 
+--    and the matched records from the right table
+-- - RIGHT OUTER JOIN: Returns all records from the right table, 
+--    and the matched records from the left table
+-- - FULL OUTER JOIN: Returns all records when there is a match in either left or right table
+
+
+
+
+
+--OLYMPICS DATABASE:
+
+--INNER JOIN
+--Join the o_countries and o_medal_table_ tables.
+select *
+from olympics.o_countries c inner join olympics.o_medal_table m on m.country_id=c.c_id
+;
+
+--Join the o_sport_disciplines and o_sport_events tables.
+select event.*, event.name, dis.name
+from olympics.o_sport_events event inner join olympics.o_sport_disciplines dis on event.discipline_id=dis.d_id
+;
+-------------------------------------------------------------------------
+--LEFT/RIGHT JOIN
+
+--Join the o_sport_disciplines and o_sport_events tables.
+select *
+from olympics.o_sport_events event left join olympics.o_sport_disciplines dis on event.discipline_id=dis.d_id
+;
+
+select *
+from olympics.o_countries c inner join olympics.o_medal_table m on m.country_id=c.c_id
+;
+
+select *
+from olympics.o_countries c left join olympics.o_medal_table m on m.country_id=c.c_id
+;
+
+select *
+from olympics.o_countries c right join olympics.o_medal_table m on m.country_id=c.c_id
+;
+
+select *
+from olympics.o_countries c full join olympics.o_medal_table m on m.country_id=c.c_id
+;
+-------------------------------------------------------
+--NATURAL JOIN
+--Join the o_teammembers and o_results tables.
+select *
+from olympics.o_teammembers, olympics.o_results
+;
+
+select *
+from olympics.o_teammembers team, olympics.o_results result
+where team.athlete_id=result.athlete_id
+;
+
+
+---------------------------------------------------------
+--Practicing exercises
+
+--1. List the athletes' names, birthplaces and the countries they come from.
+select a.name, a.birthplace, c.name as country
+from olympics.o_countries c inner join olympics.o_athletes a on c.c_id=a.country_id;
+--2. List the names of the countries and the numbers of medals (gold,silver,bronze)
+--they earned.
+select c.name, m.gold, m.silver, m.bronze
+from olympics.o_countries c inner join olympics.o_medal_table m on c.c_id=m.country_id
+;
+
+select c.name, m.gold, m.silver, m.bronze
+from olympics.o_countries c left join olympics.o_medal_table m on c.c_id=m.country_id
+;
+--3. Return the name of each continent with the amount of gained gold, silver and bronze medals.
+select c.continent, sum(m.gold), sum(m.silver), sum(m.bronze)
+from olympics.o_countries c inner join olympics.o_medal_table m on c.c_id=m.country_id
+group by c.continent
+;
+--4. Return the name of each European country and the number of disctinct medals. Order the rows 
+--by the number of gold medals, then by the number of silver medals, and the number of bronze models. 
+--Use descending order in all stages.
+select c.name, m.gold, m.silver, m.bronze
+from olympics.o_countries c left join olympics.o_medal_table m on c.c_id=m.country_id
+where continent='Europe'
+order by 2 desc, 3 desc, 4 desc
+;
+--5. Return the name of each discipline and the number of corresponding events.
+--Order the rows by the discipline names.
+select dis.name, count(*)
+from olympics.o_sport_disciplines dis left join olympics.o_sport_events event on dis.d_id=event.discipline_id
+group by dis.d_id, dis.name
+;
+--6. Return each continent and its worst and best places, if (and only if) they differ.
+select country.continent, min(result.place), max(result.place)
+from olympics.o_results result inner join olympics.o_athletes athlete on result.athlete_id=athlete.a_id 
+right join olympics.o_countries country on country.c_id=athlete.country_id 
+group by country.continent
+having min(result.place)<>max(result.place)
+;
+--7. Return each discipline and the number of male and female events.
+
+--8. Return each discipline for which we know at least 1 result. Return each name only once.
+
+
+--------------------------------------------
+--Example: 
+select  *
+from book_library.books books inner join book_library.writing w
+    on books.book_id=w.book_id
+    ;
+
+--1. What books (only book id) did Christie Agatha write?
+select w.book_id
+from book_library.writing w inner join book_library.authors a on w.author_id=a.author_id
+where a.last_name='Christie' and a.first_name='Agatha';
+
+-- The SELECT DISTINCT statement is used to return only distinct (different) values.
+
+--2. How many authors did write the books which topic is history,
+--   science, or literature. One author should be counted only one time.
+select count(distinct w.author_id)
+from book_library.writing w inner join book_library.books b on w.book_id=b.book_id
+where topic in ('History', 'Science', 'Literature');
+
+--3. How many book items was borrowed by each customer (name)?
+select borr.customer_id, count(distinct borr.book_item_id), customer.first_name, customer.last_name
+from book_library.borrowing borr inner join book_library.customers customer
+    on borr.customer_id=customer.library_card_number
+group by borr.customer_id, customer.first_name, customer.last_name
+;
+
+select borr.customer_id, count(distinct borr.book_item_id), customer.first_name, customer.last_name
+from book_library.borrowing borr right join book_library.customers customer
+    on borr.customer_id=customer.library_card_number
+group by borr.customer_id, customer.first_name, customer.last_name
+;
+
+--4. List all books (with id and title) and if they have book items
+--   put their book item id-s next to the title.
+select book.book_id, book.title, item.book_item_id
+from book_library.books book left join book_library.book_items item on book.book_id=item.book_id
+;
+--5. Which category has more than 3 customers?
+
+
+--6. Which books have more than 3 writers?
+
+
+--7. List the authors who got at least 2 times more than 150000 royalty.
+--   The list should be order by author name.
+
+
+
+--8. How many book items do belong to each book (title, book_id)?
+
+
+
+
+
+
+
+

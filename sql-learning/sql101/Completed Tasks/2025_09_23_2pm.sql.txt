@@ -1,0 +1,170 @@
+-- List all customers.
+select *
+from book_library.customers;
+
+-- List all books - just title.
+select title
+from book_library.books;
+-- List all authors.
+select * 
+from book_library.authors;
+-- List all royalties.
+ select royalty
+ from book_library.writing;
+-- List theoretical values in descending order.
+select theoretical_value
+from book_library.book_items
+order by theoretical_value desc nulls last
+;
+-- List bring back dates in ascending order.
+select bring_back_date
+from book_library.borrowing
+order by bring_back_date;
+-- List thriller books.
+select *
+from book_library.books
+where topic='Thriller';
+-- List history or thriller books.
+select *
+from book_library.books
+where topic='Thriller' or topic='History';
+
+select *
+from book_library.books
+where topic in ('History', 'Thriller');
+
+select *
+from book_library.books
+where topic not in ('History', 'Thriller');
+
+----------------------------------------------------
+-- List books whose price is higher than 5000 or whose number of pages is more than 500.
+select *
+From book_library.books
+where price>5000 or number_of_pages>500;
+-- List books whose price is between 1000 and 5000
+select *
+from book_library.books
+where price between 1000 and 5000;
+-- List books whose price is not between 1000 and 5000
+select *
+from book_library.books
+where price not between 1000 and 5000;
+-- List books where the topic is literature, history or science
+select *
+from book_LIbrary.books
+where topic in ('Literature', 'History', 'Science');
+-- List books where the topic is NOT literature, history or science
+select *
+from book_LIbrary.books
+where topic not in ('Literature', 'History', 'Science');
+
+select *
+from book_LIbrary.books
+where topic!='Literature' and topic!='History' and topic!='Science';
+-- List books where the topic is unknown.
+select *
+from book_library.books
+where topic is null;
+-- List books where the topic is known.
+select *
+from book_library.books
+where topic is not null;
+
+------------------------------------------------------
+--The LIKE operator is used in a WHERE clause to search for
+--a specified pattern in a column.
+
+--There are two wildcards often used in conjunction with the LIKE operator:
+--     The percent sign (%) represents zero, one, or multiple characters
+--     The underscore sign (_) represents one, single character
+
+SYNTAX:
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+EXAMPLES:
+ 
+-- List the books which title begin with 'The'.
+select title
+from book_library.books
+where title like 'The%'
+;
+
+select title
+from book_library.books
+where title not like 'The%'
+;
+-- List the books which title contains at least two 'a'.  ....a....a....
+select title
+from book_library.books
+where title like '%a%a%'
+;
+
+select title
+from book_library.books
+where lower(title) like '%a%a%'
+;
+select title
+from book_library.books
+where upper(title) like '%A%A%'
+;
+-- List the books which title contains exactly two 'a'.
+select title
+from book_library.books
+where lower(title) like '%a%a%' and lower(title) not like '%a%a%a%';
+;
+-- List the books which title ends with 'd'.
+select title
+from book_library.books
+where lower(title) like '%d'
+;
+-- List the books which title begins with any character, BUT the second character is 'a'.
+select title
+from book_library.books
+where lower(title) like '_a%';
+
+---------------------------------------------------------
+--round() 
+--The ROUND() function rounds a number to a specified number of decimal places.
+--SYNTAX: 	 ROUND(number, decimals, operation)
+select price/number_of_pages, round(price/number_of_pages), round(price/number_of_pages,5)
+from book_library.books;
+-- trunc()
+select price/number_of_pages, trunc(price/number_of_pages), trunc(price/number_of_pages,5)
+from book_library.books;
+
+select price/number_of_pages, round(price/number_of_pages,2), trunc(price/number_of_pages,2)
+from book_library.books;
+
+-- length()
+select title, length(title)
+from book_library.books;
+
+
+--DUAL Table:
+--The DUAL is special one row, one column table present by default in all Oracle databases.
+--The owner of DUAL is SYS (SYS owns --the data dictionary, therefore DUAL is part
+--of the data dictionary.) but DUAL can be accessed by every user. The table has a 
+--single VARCHAR2(1) column called DUMMY that has a value of 'X'.
+--There may be a situation where we want to query something that is not from a table. 
+--For example, getting the current date or 
+--querying a simple arithmetic expression like 2+2.
+
+select *
+from dual;
+
+Examples: 
+select 2*3 
+from dual;
+
+select round(589/47, 3), length('apple')
+from dual;
+
+select sysdate 
+from dual;
+-- sysdate  - current system date and time
+
+
+-- EXTRACT

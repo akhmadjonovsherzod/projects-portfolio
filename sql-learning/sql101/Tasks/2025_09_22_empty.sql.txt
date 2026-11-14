@@ -1,0 +1,84 @@
+-- List all customers.
+
+-- List all books - just title.
+
+-- List all authors.
+
+-- List all royalties.
+ 
+-- List theoretical values in descending order.
+
+-- List bring back dates in ascending order.
+
+-- List horror books.
+
+-- List horror or thriller books.
+
+----------------------------------------------------
+
+-- List books whose price is higher than 5000 or whose number of pages is more than 500.
+
+-- List books whose price is between 1000 and 5000
+
+-- List books whose price is not between 1000 and 5000
+
+-- List books where the topic is literature, history or science
+
+-- List books where the topic is NOT literature, history or science
+
+-- List books where the topic is unknown.
+
+-- List books where the topic is known.
+
+
+------------------------------------------------------
+--The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+--There are two wildcards often used in conjunction with the LIKE operator:
+--     The percent sign (%) represents zero, one, or multiple characters
+--     The underscore sign (_) represents one, single character
+
+SYNTAX:
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+EXAMPLES:
+ 
+-- List the books which title begin with 'The'.
+
+-- List the books which title contains at least two 'a'.
+
+-- List the books which title contains exactly two 'a'.
+
+-- List the books which title ends with 'd'.
+
+-- List the books which title begins with any character, BUT the second character is 'a'.
+
+
+---------------------------------------------------------
+--round() 
+--The ROUND() function rounds a number to a specified number of decimal places.
+--SYNTAX: 	 ROUND(number, decimals, operation)
+
+-- trunc()
+
+
+-- length()
+
+
+
+--DUAL Table:
+--The DUAL is special one row, one column table present by default in all Oracle databases. The owner of DUAL is SYS (SYS owns --the data dictionary, therefore DUAL is part of the data dictionary.) but DUAL can be accessed by every user. The table has a --single VARCHAR2(1) column called DUMMY that has a value of 'X'.
+--There may be a situation where we want to query something that is not from a table. For example, getting the current date or --querying a simple arithmetic expression like 2+2.
+
+Examples: 
+select 2*3 
+from dual;
+
+select sysdate 
+from dual;
+-- sysdate  - current system date and time
+
+
+-- EXTRACT
