@@ -1,0 +1,12 @@
+# Google Cloud credentials
+**/credentials.json
+**/*service-account*.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Secret keys
+*.pem
+*.key
