@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Latin Clinical Terms — Tutor</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="app-page">
+
+  <header class="topnav">
+    <div class="brand"><span class="cross">✚</span><span data-i18n="app_name">Latin Clinical Terms</span></div>
+    <nav class="nav-links">
+      <a href="chatbot.html" class="active" data-i18n="nav_chat">Tutor</a>
+      <a href="profile.html" data-i18n="nav_profile">Profile</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="en">EN</button>
+        <button data-lang="uz">UZ</button>
+      </div>
+      <button class="icon-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+      <button class="btn btn-ghost" id="logout-btn" data-i18n="logout">Log out</button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h2 data-i18n="sections_title">Sections</h2>
+      <div id="section-list"></div>
+    </aside>
+
+    <main class="main-panel">
+      <div class="chat-toolbar">
+        <button class="btn btn-secondary" id="summarize-btn" data-i18n="summarize_button">Summarize section</button>
+        <button class="btn btn-ghost" id="clear-chat-btn" data-i18n="clear_chat">Clear chat</button>
+      </div>
+
+      <div class="examples-row" id="examples-list"></div>
+
+      <div class="chat-log" id="chat-log">
+        <div class="empty-state" data-i18n="empty_chat">Ask a question or click "Summarize section" to begin.</div>
+      </div>
+
+      <form class="chat-form" id="chat-form">
+        <input id="chat-input" type="text" data-i18n-placeholder="chat_placeholder" placeholder="Ask about a term, prefix, suffix or root…" autocomplete="off" />
+        <button type="submit" class="btn btn-primary" data-i18n="send">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/chatbot.js"></script>
+</body>
+</html>

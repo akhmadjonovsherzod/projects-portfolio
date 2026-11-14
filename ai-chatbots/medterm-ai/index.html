@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Latin Clinical Terms — Sign in</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="brand"><span class="cross">✚</span><span data-i18n="app_name">Latin Clinical Terms</span></div>
+    <p class="auth-tagline" data-i18n="tagline">Learn how clinical terms are built in Latin</p>
+
+    <div class="lang-switch centered">
+      <button data-lang="en">EN</button>
+      <button data-lang="uz">UZ</button>
+    </div>
+
+    <h1 id="auth-title" data-i18n="login_title">Sign in</h1>
+
+    <form id="auth-form" novalidate>
+      <div class="field hidden" id="name-field">
+        <label for="name" data-i18n="name_label">Full name</label>
+        <input id="name" type="text" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="email" data-i18n="email_label">Email</label>
+        <input id="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="password" data-i18n="password_label">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required />
+      </div>
+
+      <div class="auth-error" id="auth-error"></div>
+
+      <button type="submit" class="btn btn-primary auth-submit" id="auth-submit" data-i18n="login_button">Sign in</button>
+      <div class="auth-loading hidden" id="auth-loading" data-i18n="loading">Thinking…</div>
+    </form>
+
+    <div class="auth-toggle-row">
+      <button class="link-btn" id="toggle-mode" data-i18n="switch_to_register">Need an account? Register</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
